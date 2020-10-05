@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Camera</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="link mb-3">
+        <a class="btn btn-primary mt-3" href="index.html">Google Map</a>
+        <a class="btn btn-primary mt-3" href="camera.html">Camera</a>
+        <a class="btn btn-primary mt-3" href="network.html">Network</a>
+    </div>
+    <button id="cameraApp" class="btn btn-primary">Take Image</button>
+    <br>
+    <div style="border: 1px solid; width: 200px; min-height: 100px;">
+        <img src="" id="myImage" width="200px">
+    </div>
+    <script src="cordova.js"></script>
+
+
+    <script type="text/javascript">
+
+        document.getElementById('cameraApp').addEventListener('click', cameraApp);
+        function cameraApp() {
+
+            navigator.camera.getPicture(onSuccess, onFail, {
+                quality: 100,
+
+                destinationType: Camera.DestinationType.DATA_URL
+
+            });
+
+            function onSuccess(ImageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + ImageData;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
